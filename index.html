@@ -75,10 +75,7 @@ $(document).ready(function(){
     }
     function filterUser(text)
     {
-        return users.filter(user => {
-            if(user.name.includes(text))
-            return user;
-        })
+        return users.filter(user => user.name.includes(text))
     }
 });
 </script>
