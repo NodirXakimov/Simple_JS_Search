@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>ES task</title>
+    <style>
+        .card {
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="container mt-4">
+        <div class="search">
+            <div class="form-group row">
+                <div class="col col-2">
+                    <label for="search" class="float-right">Search:</label>
+                </div>
+                <div class="col col-10">
+                    <input type="text" class="form-control" id="search">
+                </div>
+            </div>
+        </div>
+        <div class="content">
+            <div class="jumbotron" id="jumbotron">
+               
+            </div>
+        </div>
+    </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    let users = [
+    {name: 'Nodir'},
+    {name: 'Nodir'},
+    {name: 'Akrom'},
+    {name: 'Shohzod'},
+    {name: "Navro'z"},
+    {name: "Rustam"},
+    {name: 'Jonibek'},
+    {name: 'Diyor'},
+    {name: 'Salohiddin'},
+    {name: 'Sanjar'}
+]
+
+$(document).ready(function(){
+    $('#search').focus();
+    users.forEach(user => {
+        $('#jumbotron').append(makeItem(user));
+    });
+    $('#search').on('keyup', ()=>{
+        let filteredUsers = filterUser($('#search').val())
+        $('#jumbotron').empty();
+        if(filteredUsers.length != 0){
+            filteredUsers.forEach(user => {
+                $('#jumbotron').append(makeItem(user));
+            })
+        } else {
+            $('#jumbotron').append(makeItem(''));
+        }
+    })
+    function makeItem(user)
+    {
+        return `
+            <div class="card">
+                <div class="card-body">${user.name || 'Not found'}</div>
+            </div>
+        `;
+    }
+    function filterUser(text)
+    {
+        return users.filter(user => {
+            if(user.name.includes(text))
+            return user;
+        })
+    }
+});
+</script>
+</body>
+</html>
